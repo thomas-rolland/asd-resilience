@@ -9,8 +9,9 @@ You will find here the python and R scripts developped for the analyses reported
 All raw genetic data are available upon request from [SFARI-base](https://sfari.org/sfari-base), [UK-Biobank](https://www.ukbiobank.ac.uk/), and downloadable from [the Autism Sequencing Consortium](https://genome.emory.edu/ASC/) and [gnomAD](https://gnomad.broadinstitute.org/downloads). The full variant calling and quality control pipeline is described in details in the manuscript. All phenotypic data for SSC and SPARK cohorts are available upon request from [SFARI-base](https://sfari.org/sfari-base). All functioning/cognitive metrics and MRI-based brain volumes for UK-Biobank individuals are available upon request from [UK-Biobank](https://www.ukbiobank.ac.uk/).
 
 ## Software requirements
-* pandas
-* numpy
+* pandas (https://pandas.pydata.org/)
+* numpy (https://numpy.org/)
+* pyliftover (https://pypi.org/project/pyliftover/)
 
 
 ## Data requirements

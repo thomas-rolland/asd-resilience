@@ -26,6 +26,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - alt
 - gene_symbol *(official HGNC gene symbol)*
 - consequence
+- relative_position *(as a percentage on encoded protein, from [loftee](https://github.com/konradjk/loftee) or [vep](https://www.ensembl.org/Tools/VEP)/[biomart](https://www.ensembl.org/biomart/martview/))*
 - iid *(individual id)*
 - transmission *(denovo, father, mother, unknown)*
 

@@ -2,10 +2,11 @@
 
 You will find here the python and R scripts developped for the analyses reported in Rolland et al. in preparation.
 We report here the analyses post-variant calling and quality check.
-All the data are available upon request from [SFARI-base](https://sfari.org/sfari-base), [UK-Biobank](https://www.ukbiobank.ac.uk/), (the Autism Sequencing Consortium](https://genome.emory.edu/ASC/) and [gnomAD](https://gnomad.broadinstitute.org/downloads), and the calling pipeline is described in details in the manuscript.
+All the data are available upon request from [SFARI-base](https://sfari.org/sfari-base), [UK-Biobank](https://www.ukbiobank.ac.uk/), [the Autism Sequencing Consortium](https://genome.emory.edu/ASC/) and [gnomAD](https://gnomad.broadinstitute.org/downloads), and the calling pipeline is described in details in the manuscript.
 
 ## Software requirements
->python panda
+* pandas
+* numpy
 
 
 ## Data requirements

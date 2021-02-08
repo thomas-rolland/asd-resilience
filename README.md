@@ -15,17 +15,22 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 ## Data requirements
 
-#### A tabular dataframe containing the variants with at least the following columns:
+#### The base-level pext score from the gnomAD website (https://gnomad.broadinstitute.org/downloads#v2-pext)
+
+#### A tabular file containing the variants with at least the following columns:
 - chromosome
 - position
 - ref
 - alt
-- consequence
 - gene_symbol *(official HGNC gene symbol)*
+- consequence
 - iid *(individual id)*
 - transmission *(denovo, father, mother, unknown)*
 
-#### A tabular dataframe listing the individuals wit a least the following columns:
+#### A tabular file listing the individuals with a least the following columns:
 - iid *(individual id)*
+- fid *(family id)*
+- family_relationship *(proband, sibling, father, mother, unknown)*
 - status *(1-control, 2-case)*
 - sex *(1-male, 2-female)*
+- cohort *(if multiple cohorts are analysed)*

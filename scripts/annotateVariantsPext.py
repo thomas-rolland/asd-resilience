@@ -2,7 +2,7 @@
 # Author: Thomas Rolland	jerikoo75@gmail.com
 
 #=========================================================================
-# annotate_variant_pext.py
+# annotateVariantsPext.py
 # Get pext score for each variant of tabular file
 #=========================================================================
 

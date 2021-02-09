@@ -47,7 +47,8 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - income *(Income before tax score provided by UK-Biobank)*
 - qualification *(Highest qualification level provided by UK-Biobank)*
 
-*Brain volumes for MRI-based gene clustering amongst UK-Biobank individuals:*
+#### A tabular file listing the MRI-based volumes with a least the following columns -> mri_table.tsv
+- iid *(individual id)*
 - IntraCranial
 - TotalBrain
 - CerebralCortex

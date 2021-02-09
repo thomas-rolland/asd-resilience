@@ -35,8 +35,6 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 #### A tabular file listing the individuals with a least the following columns -> individual_table.tsv
 - iid *(individual id)*
-- fid *(family id)*
-- family_relationship *(proband, sibling, father, mother, unknown)*
 - status *(1-control, 2-case)*
 - age *(age of individual)*
 - sex *(1-male, 2-female)*

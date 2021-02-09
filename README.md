@@ -42,7 +42,10 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 
 ## Annotating variants with pext score
-
+```
+annotateVariantsPext.py
+```
+This script will match the pext score to the tabular file containing variants
 
 ## Attributable risk and relative risk
 

@@ -25,7 +25,7 @@ variant2gene = function(variant_table, sample_table, gene_table)
   		{
 			for (status in unique(tab_gene$status))
 			{
-				tab_gene$NC[tab_gene$gene == gene & tab_gene$cohort == cohort & tab_gene$status == status] = length(unique(variant_table$IID[variant_table$gene == gene & variant_table$cohort == cohort & variant_table$status == status]))
+				tab_gene$NC[tab_gene$gene == gene & tab_gene$cohort == cohort & tab_gene$status == status] = length(unique(variant_table$iid[variant_table$gene == gene & variant_table$cohort == cohort & variant_table$status == status]))
 				tab_gene$N[tab_gene$gene == gene & tab_gene$cohort == cohort & tab_gene$status == status] = sample_table$N[sample_table$cohort == cohort & sample_table$status == status]
 			}
 		}

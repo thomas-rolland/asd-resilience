@@ -46,6 +46,9 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - status *(1-control, 2-case)*
 - N *(number of individuals)*
 
+#### A tabular file listing the genes of interest with a least the following column -> gene_table.tsv
+- gene_symbol *(official HGNC gene symbol)*
+
 
 ## Annotating variants with pext score
 ```

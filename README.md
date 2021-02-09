@@ -78,6 +78,10 @@ This script will provide regression coefficients associated to specific covariat
 
 
 ## Distribution of individuals in terciles of ASD-PGS scores
+```
+distributionIndividualsGPS.R
+```
+This script will provide the fraction of individuals in each quantile of ASD-GPS (default to 3 quantiles).
 
 
 

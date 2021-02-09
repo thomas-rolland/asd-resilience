@@ -26,6 +26,7 @@ VCF = pd.read_csv(input_file, sep = "\t", dtype = str)
 VCF["hg19_position"] = "NA"
 for i in range(0, VCF.shape[0]):
 	position = int(VCF["position"][i])
+	# Specify closest exon for splice donor/acceptor variants
 	if (VCF["consequence"][i] == "splice_donor_variant"):
 		if VCF["strand"][i] == "1":
 			position = position - 3
@@ -36,24 +37,24 @@ for i in range(0, VCF.shape[0]):
 			position = position + 3
 		else:
 			position = position - 3
+	# Get hg19-based variant position
 	hg19_position = lo.convert_coordinate('chr' + VCF["chromosome"][i], position)[0][1]
 	VCF["hg19_position"][i] = str(hg19_position)
+
+# Format dataframe
 vcf = pd.DataFrame(pd.concat([VCF["chromosome"].reset_index(drop=True), VCF["hg19_position"].reset_index(drop=True), VCF["ref"].reset_index(drop=True), VCF["alt"].reset_index(drop=True), VCF["consequence"].reset_index(drop=True), VCF["gene"].reset_index(drop=True)], axis = 1))
 vcf.columns = "chromosome position ref alt consequence gene".split()
 vcf["chrpos"] = vcf["chromosome"] + ":" + vcf["position"]
 vcf = vcf.drop_duplicates()
-print ("\tVCF variants:", VCF.shape, "unique:", vcf.shape)
 
-# Loading pext (114,944,599 lines)
-print ("Loading pext ...")
+#=========================================================================
+# Loading pext score for variants identified
+#=========================================================================
 brain = ["Brain_FrontalCortex_BA9_", "Brain_Hippocampus", "Brain_Nucleusaccumbens_basalganglia_", "Brain_Spinalcord_cervicalc_1_", "Brain_CerebellarHemisphere", "Brain_Cerebellum", "Brain_Cortex", "Brain_Substantianigra", "Brain_Anteriorcingulatecortex_BA24_", "Brain_Putamen_basalganglia_", "Brain_Caudate_basalganglia_", "Brain_Amygdala"]
-#brain = [8, 14, 16, 18, 21, 22, 40, 41, 43, 49, 50, 51, 57]
-n_annots = 10
-len_of_annot = 59
 iter_csv = pd.read_csv(input_pext, iterator = True, chunksize = 1000000, sep = "\t", dtype = str)
-all_variants = pd.DataFrame()
+variants_with_pext = pd.DataFrame()
 for chunk in iter_csv:
-	print (chunk.shape)
+	# Getting position and matching to identified variants
 	position = chunk["locus"].str.split(':', n = 2, expand = True)
 	chunk["chr"] = position[0]
 	chunk["position"] = position[1]
@@ -62,7 +63,7 @@ for chunk in iter_csv:
 	if (chunk.shape[0] == 0):
 		continue
 
-	print ("Found some variants:", chunk.shape)
+	# Measuring average pext over brain tissues
 	chunk["pext"] = "NA"
 	for i in range(0, chunk.shape[0]):
 		mn = []
@@ -74,14 +75,15 @@ for chunk in iter_csv:
 				mn.append(float(value))
 		if len(mn) > 0:
 			chunk["pext"][i] = max(mn)
+	
+	# Recording variants found with their corresponding pext
 	chunk = pd.DataFrame(pd.concat([chunk["chr"].reset_index(drop = True), chunk["position"].reset_index(drop = True), chunk["pext"].reset_index(drop = True), chunk["chrpos"].reset_index(drop = True)], axis = 1))
-	all_variants = pd.concat([all_variants, chunk])
-	all_variants = all_variants.drop_duplicates()
+	variants_with_pext = pd.concat([variants_with_pext, chunk])
+	variants_with_pext = variants_with_pext.drop_duplicates()
 
-	print ("All variants with pext :", all_variants.shape)
-
-# Matching to original VCF file
-print ("Matching to original VCF file ...")
+#=========================================================================
+# Writing out variants identified with corresponding pext
+#=========================================================================
 VCF["chrpos_hg19"] = VCF["chromosome"] + ":" + VCF["hg19_position"]
 VCF["pext"] = "NA"
 for i in range(0, VCF.shape[0]):

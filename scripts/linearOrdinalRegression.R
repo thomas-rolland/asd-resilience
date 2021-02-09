@@ -14,7 +14,7 @@ linear_regression = function(individual_table, variant_table, response, covariat
 	
 	# Adding column for variant presence
 	individual_table = cbind(individual_table, has_variant = "No")
-	individual_table$has_variant[individual_table$IID %in% variant_table$IID] = "Yes"
+	individual_table$has_variant[individual_table$iid %in% variant_table$iid] = "Yes"
 	covariates = c("has_variant", covariates)
 	
 	df = matrix(nrow = length(covariates), ncol = 5, data = NA)
@@ -40,7 +40,7 @@ ordinal_regression = function(individual_table, variant_table, response, covaria
 
 	# Adding column for variant presence
 	individual_table = cbind(individual_table, has_variant = "No")
-	individual_table$has_variant[individual_table$IID %in% variant_table$IID] = "Yes"
+	individual_table$has_variant[individual_table$iid %in% variant_table$iid] = "Yes"
 	covariates = c("has_variant", covariates)
 	
 	df = matrix(nrow = length(covariates), ncol = 5, data = NA)

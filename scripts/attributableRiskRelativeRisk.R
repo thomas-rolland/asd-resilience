@@ -1,8 +1,6 @@
 
-#################
-# From variant table to gene table
-#################
-variant2gene = function(t, total_individuals, t_gene)
+# Number of individuals carrying variants per gene
+variant2gene = function(variant_table, sample_table)
 {
   # Creating data frame per gene, stratified by population and status
 	tab = as.data.frame(cbind(expand.grid(t_gene$gene, unique(total_individuals$population), unique(total_individuals$status)), NC = 0, N = 0, tada = NA, LOEUF = NA, pLI = NA))
@@ -25,11 +23,6 @@ variant2gene = function(t, total_individuals, t_gene)
         # Number of carriers and number of individuals
   			tab$NC[tab$gene == gene & tab$population == population & tab$status == status] = length(unique(t$IID[t$gene == gene & t$population == population & t$status == status]))
   			tab$N[tab$gene == gene & tab$population == population & tab$status == status] = total_individuals$N[total_individuals$population == population & total_individuals$status == status]
-
-        # Deleteriousness scores
-  			tab$tada[tab$gene == gene & tab$population == population & tab$status == status] = unique(t_gene$TADA[t_gene$gene == gene])
-  			tab$LOEUF[tab$gene == gene & tab$population == population & tab$status == status] = unique(t_gene$LOEUF[t_gene$gene == gene])
-  			tab$pLI[tab$gene == gene & tab$population == population & tab$status == status] = unique(t_gene$pLI[t_gene$gene == gene])
   	  }
   	}
   }

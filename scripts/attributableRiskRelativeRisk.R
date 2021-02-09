@@ -38,6 +38,7 @@ variant2gene = function(variant_table, sample_table, gene_table)
 # Calculate attributable and relative risk
 gene2risk = function(tab_gene, sample_table, RR_Inf = TRUE, RR_zero = FALSE)
 {
+	# tab_gene = Dataframe provided by variant2gene function above
 	# RR_Inf = Boolean indicating whether infinite relative risk values due to absent carrier controls should be artificially set to 1 to avoid infinite RR
 	# RR_zero = Boolean indicating whether genes for which no carrier cases were identified should be removed
 	

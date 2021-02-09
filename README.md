@@ -15,6 +15,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 * numpy (https://numpy.org/)
 * pyliftover (https://pypi.org/project/pyliftover/)
 * MASS R package (https://cran.r-project.org/web/packages/MASS/index.html)
+* stats R package (https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
 
 ## Data requirements
 

@@ -17,9 +17,9 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 ## Data requirements
 
-#### The base-level pext score from the gnomAD website (GRCh37, https://gnomad.broadinstitute.org/downloads#v2-pext)
+#### The base-level pext score from the gnomAD website (GRCh37, https://gnomad.broadinstitute.org/downloads#v2-pext) -> all.baselevel.pext.tsv
 
-#### A tabular file containing the variants with at least the following columns (GRCh38):
+#### A tabular file containing the variants with at least the following columns (GRCh38) -> variant_table.tsv
 - chromosome
 - position
 - ref
@@ -31,7 +31,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - iid *(individual id)*
 - transmission *(denovo, father, mother, unknown)*
 
-#### A tabular file listing the individuals with a least the following columns:
+#### A tabular file listing the individuals with a least the following columns -> individual_table.tsv
 - iid *(individual id)*
 - fid *(family id)*
 - family_relationship *(proband, sibling, father, mother, unknown)*
@@ -41,7 +41,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - cohort *(in case multiple cohorts are analysed)*
 - ASD_PGS *(z-scored polygenic score values for ASD)*
 
-#### A tabular file listing the sample sizes with a least the following columns:
+#### A tabular file listing the sample sizes with a least the following columns -> sample_table.tsv
 - cohort *(in case multiple cohorts are analysed)*
 - status *(1-control, 2-case)*
 - N *(number of individuals)*

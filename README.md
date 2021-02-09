@@ -42,12 +42,27 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - cohort *(in case multiple cohorts are analysed)*
 - ASD_PGS *(z-scored polygenic score values for ASD)*
 
-*For regression analyses amongst UK-Biobank individuals:*
+*Functioning/cognitive features for regression analyses amongst UK-Biobank individuals:*
 - fluid_intelligence_score *(Fluid intelligence score provided by UK-Biobank)*
 - townsend_index *(Townsend deprivation index provided by UK-Biobank)*
 - income *(Income before tax score provided by UK-Biobank)*
 - qualification *(Highest qualification level provided by UK-Biobank)*
 
+*Brain volumes for MRI-based gene clustering amongst UK-Biobank individuals:*
+- IntraCranial
+- TotalBrain
+- CerebralCortex
+- CerebralWhiteMatter
+- Thalamus
+- CaudateNucleus
+- Putamen
+- Pallidum
+- Hippocampus
+- Amygdala
+- NucleusAccumbens
+- CorpusCallosum
+- CerebellumCortex
+- CerebellumWhiteMatter
 
 #### A tabular file listing the sample sizes with a least the following columns -> sample_table.tsv
 - cohort *(in case multiple cohorts are analysed)*
@@ -82,7 +97,7 @@ This script will provide regression coefficients associated to specific covariat
 ```
 geneClusteringMRI.R
 ```
-This script will plot heatmap of brain volume differences between LoF carriers and non-carriers by gene.
+This script will provide a dataframe summarizing brain volume differences between LoF carriers and non-carriers by gene.
 
 
 ## Distribution of individuals in terciles of ASD-PGS scores

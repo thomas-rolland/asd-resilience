@@ -1,11 +1,11 @@
 
 #=========================================================================
 # distributionIndividualsGPS.R
-# Function to plot the distribution of the fraction of individuals in GPS terciles
+# Function to calculate the fraction of individuals in GPS quantiles
 #=========================================================================
 
 
-# Quantiles of values, not of distribution
+# Quantiles of values, not of individuals
 value_quantile = function(distrib, n_quantiles)
 {
   mini = min(distrib, na.rm = TRUE)

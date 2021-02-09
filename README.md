@@ -4,6 +4,7 @@ You will find here the python and R scripts developped for the post-processing a
 - Annotating variants with pext score
 - Attributable risk and relative risk
 - Linear and ordinal regression between risk and socio-economic features in UK-Biobank
+- Clustering of genes and brain regions based on MRI-derived brain volumes in UK-Biobank
 - Distribution of individuals in terciles of ASD-PGS scores
 
 All raw genetic data are available upon request from [SFARI-base](https://sfari.org/sfari-base), [UK-Biobank](https://www.ukbiobank.ac.uk/), and downloadable from [the Autism Sequencing Consortium](https://genome.emory.edu/ASC/) and [gnomAD](https://gnomad.broadinstitute.org/downloads). The full variant calling and quality control pipeline is described in details in the manuscript. All phenotypic data for SSC and SPARK cohorts are available upon request from [SFARI-base](https://sfari.org/sfari-base). All functioning/cognitive metrics and MRI-based brain volumes for UK-Biobank individuals are available upon request from [UK-Biobank](https://www.ukbiobank.ac.uk/).
@@ -75,6 +76,13 @@ This script will calculate gene-level attributable risk and relative risk.
 linearOrdinalRegression.R
 ```
 This script will provide regression coefficients associated to specific covariates, including LoF presence.
+
+
+## Clustering of genes and brain regions based on MRI-derived brain volumes in UK-Biobank
+```
+geneClusteringMRI.R
+```
+This script will plot heatmap of brain volume differences between LoF carriers and non-carriers by gene.
 
 
 ## Distribution of individuals in terciles of ASD-PGS scores

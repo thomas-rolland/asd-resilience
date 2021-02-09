@@ -36,6 +36,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - fid *(family id)*
 - family_relationship *(proband, sibling, father, mother, unknown)*
 - status *(1-control, 2-case)*
+- age *(age of individual)*
 - sex *(1-male, 2-female)*
 - cohort *(in case multiple cohorts are analysed)*
 - ASD_PGS *(z-scored polygenic score values for ASD)*
@@ -50,16 +51,20 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 ```
 annotateVariantsPext.py
 ```
-This script will match the pext score to the tabular file containing variants
+This script will match the pext score to the tabular file containing variants.
 
 ## Attributable risk and relative risk
 ```
-attributableRiskRelativeRisk.py
+attributableRiskRelativeRisk.R
 ```
-This script will calculate gene-level attributable risk and relative risk
+This script will calculate gene-level attributable risk and relative risk.
 
 
 ## Linear and ordinal regression between risk and socio-economic features in UK-Biobank
+```
+linearOrdinalRegression.R
+```
+This script will provide regression coefficients associated to variant presence.
 
 
 ## Distribution of individuals in terciles of ASD-PGS scores

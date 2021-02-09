@@ -34,7 +34,7 @@ distrib_individual_GPS = function(individual_table, n_quantiles = 3, cohort, sta
 	f = rep(NA, length(q) - 1)
 	sep = rep(NA, length(q) - 1)
 	
-	# Get number of individuals in each quantile
+	# Get number of individuals with status of interest, in cohort of interest, and with/without LoF with given transmission type, in each quantile
 	for (i in 2:length(q))
 		n[i - 1] = length(unique(as.character(individual_table$iid[individual_table$ASD_GPS >= q[i - 1] & individual_table$ASD_GPS < q[i] & individual_table$cohort == cohort & individual_table$status == status & individual_table$transmission %in% transmission])))
 

@@ -13,7 +13,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 * pandas (https://pandas.pydata.org/)
 * numpy (https://numpy.org/)
 * pyliftover (https://pypi.org/project/pyliftover/)
-
+* MASS R package (https://cran.r-project.org/web/packages/MASS/index.html)
 
 ## Data requirements
 
@@ -60,11 +60,11 @@ attributableRiskRelativeRisk.R
 This script will calculate gene-level attributable risk and relative risk.
 
 
-## Linear and ordinal regression between risk and socio-economic features in UK-Biobank
+## Linear and ordinal regression between LoF presence and outcomes
 ```
 linearOrdinalRegression.R
 ```
-This script will provide regression coefficients associated to variant presence.
+This script will provide regression coefficients associated to specific covariates, including LoF presence.
 
 
 ## Distribution of individuals in terciles of ASD-PGS scores

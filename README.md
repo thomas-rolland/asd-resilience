@@ -40,6 +40,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - sex *(1-male, 2-female)*
 - cohort *(in case multiple cohorts are analysed)*
 - ASD_PGS *(z-scored polygenic score values for ASD)*
+
 *For regression analyses amongst UK-Biobank individuals:*
 - fluid_intelligence_score *(Fluid intelligence score provided by UK-Biobank)*
 - townsend_index *(Townsend deprivation index provided by UK-Biobank)*

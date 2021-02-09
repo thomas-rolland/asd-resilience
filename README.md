@@ -1,7 +1,7 @@
 # ASD resilience analyses
 
 You will find here the python and R scripts developped for the analyses reported in Rolland et al. in preparation:
-- Annotating variants with pext
+- Annotating variants with pext score
 - Attributable risk and relative risk
 - Linear and ordinal regression between risk and socio-economic features in UK-Biobank
 - Distribution of individuals in terciles of ASD-PGS scores
@@ -17,15 +17,15 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 ## Data requirements
 
-#### The base-level pext score from the gnomAD website (https://gnomad.broadinstitute.org/downloads#v2-pext)
+#### The base-level pext score from the gnomAD website (GRCh37, https://gnomad.broadinstitute.org/downloads#v2-pext)
 
-#### A tabular file containing the variants with at least the following columns:
+#### A tabular file containing the variants with at least the following columns (GRCh38):
 - chromosome
 - position
 - ref
 - alt
 - gene_symbol *(official HGNC gene symbol)*
-- consequence
+- consequence *(such as provided by [VEP](https://www.ensembl.org/Tools/VEP))*
 - relative_position *(as a percentage on encoded protein, from [loftee](https://github.com/konradjk/loftee) or [vep](https://www.ensembl.org/Tools/VEP)/[biomart](https://www.ensembl.org/biomart/martview/))*
 - iid *(individual id)*
 - transmission *(denovo, father, mother, unknown)*
@@ -40,7 +40,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - ASD_PGS *(z-scored polygenic score values for ASD)*
 
 
-## Annotating variants with pext
+## Annotating variants with pext score
 
 
 ## Attributable risk and relative risk

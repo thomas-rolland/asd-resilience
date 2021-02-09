@@ -4,7 +4,7 @@
 # Functions to provide a dataframe summarizing brain volume differences between LoF carriers and non-carriers by gene
 #=========================================================================
 
-gene_clustering_MRI = function(gene_table, individual_table, variant_table)
+gene_clustering_MRI = function(gene_table, mri_table, variant_table)
 {
 	brain_regions = c("TotalBrain", "IntraCranial", "CerebralCortex", "CerebralWhiteMatter", "Thalamus", "CaudateNucleus", "Putamen", "Pallidum", "Hippocampus", "Amygdala", "NucleusAccumbens", "CorpusCallosum", "CerebellumCortex", "CerebellumWhiteMatter")
 	df = as.data.frame(cbind(gene = gene_table$gene_symbol, NC = NA, cluster = NA))
@@ -18,7 +18,7 @@ gene_clustering_MRI = function(gene_table, individual_table, variant_table)
 		df$NC[df$gene == gene] = length(unique(variant_table$iid[variant_table$gene == gene]))
 		for (region in brain_regions)
 		{
-			test = wilcox.test(individual_table[individual_table$iid %in% variant_table$iid[variant_table$gene == gene], names(df) == region], individual_table[! individual_table$iid %in% variant_table$iid[variant_table$gene == gene], names(df) == region], conf.int = TRUE)
+			test = wilcox.test(mri_table[mri_table$iid %in% variant_table$iid[variant_table$gene == gene], names(mri_table) == region], mri_table[! mri_table$iid %in% variant_table$iid[variant_table$gene == gene], names(mri_table) == region], conf.int = TRUE)
 			df[df$gene == gene, names(df) == region] = as.double(test$estimate)
 		}
 	}

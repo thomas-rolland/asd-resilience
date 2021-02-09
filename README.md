@@ -37,8 +37,13 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - family_relationship *(proband, sibling, father, mother, unknown)*
 - status *(1-control, 2-case)*
 - sex *(1-male, 2-female)*
-- cohort *(if multiple cohorts are analysed)*
+- cohort *(in case multiple cohorts are analysed)*
 - ASD_PGS *(z-scored polygenic score values for ASD)*
+
+#### A tabular file listing the sample sizes with a least the following columns:
+- cohort *(in case multiple cohorts are analysed)*
+- status *(1-control, 2-case)*
+- N *(number of individuals)*
 
 
 ## Annotating variants with pext score

@@ -53,6 +53,10 @@ annotateVariantsPext.py
 This script will match the pext score to the tabular file containing variants
 
 ## Attributable risk and relative risk
+```
+attributableRiskRelativeRisk.py
+```
+This script will calculate gene-level attributable risk and relative risk
 
 
 ## Linear and ordinal regression between risk and socio-economic features in UK-Biobank

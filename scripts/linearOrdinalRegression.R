@@ -7,51 +7,53 @@
 library(MASS)
 
 # Linear regression
-linear_regression = function(individual_table, variant_table, response, covariates)
+linear_regression = function(variant_table, outcomes_table, outcome, covariates)
 {
-	# response = column containing response variable
+	# outcome = column containing response variable
 	# covariates = vector containing list of covariates (e.g. age, sex)
-	
+
 	# Adding column for variant presence
-	individual_table = cbind(individual_table, has_variant = "No")
-	individual_table$has_variant[individual_table$iid %in% variant_table$iid] = "Yes"
+	outcomes_table = cbind(outcomes_table, has_variant = 0)
+	outcomes_table$has_variant[outcomes_table$iid %in% variant_table$iid] = 1
 	covariates = c("has_variant", covariates)
-	
+
 	df = matrix(nrow = length(covariates), ncol = 5, data = NA)
 	colnames(df) = c("covariate", "coefficient", "CI_lower", "CI_upper", "p.value")
-	
+
 	# Running regression analysis for specific outcome
-	formula = as.formula(paste(response, "~", paste(covariates, collapse = "+")))
-	model = glm(formula, data = individual_table, na.action = na.omit)
+	formula = as.formula(paste(outcome, "~", paste(covariates, collapse = "+")))
+	model = glm(formula, data = outcomes_table, na.action = na.omit)
 
 	# Get regression coefficients, CIs and p-values
 	for (i in 1:length(covariates))
-		df[i, ] = c(covariates[i], summary(model)$coefficients[grepl(covariates[i], row.names(summary(model)$coefficients)),1], as.double(conf_int(model)[grepl(covariates[i], row.names(summary(model)$coefficients)),]), summary(model)$coefficients[grepl(covariates[i], row.names(summary(model)$coefficients)), 4])
+		df[i, ] = c(covariates[i], summary(model)$coefficients[grepl(covariates[i], row.names(summary(model)$coefficients)),1], as.double(confint(model)[grepl(covariates[i], row.names(summary(model)$coefficients)),]), summary(model)$coefficients[grepl(covariates[i], row.names(summary(model)$coefficients)), 4])
 
 	return (as.data.frame(df))
 }
 
 
 # Ordinal regression
-ordinal_regression = function(individual_table, variant_table, response, covariates)
+ordinal_regression = function(variant_table, outcomes_table, outcome, covariates)
 {
-	# response = column containing response variable
+	# outcome = column containing response variable
 	# covariates = vector containing list of covariates (e.g. age, sex)
 
 	# Adding column for variant presence
-	individual_table = cbind(individual_table, has_variant = "No")
-	individual_table$has_variant[individual_table$iid %in% variant_table$iid] = "Yes"
+	outcomes_table = cbind(outcomes_table, has_variant = 0)
+	outcomes_table$has_variant[outcomes_table$iid %in% variant_table$iid] = 1
 	covariates = c("has_variant", covariates)
-	
+
 	df = matrix(nrow = length(covariates), ncol = 5, data = NA)
 	colnames(df) = c("covariate", "coefficient", "CI_lower", "CI_upper", "p.value")
-	
+
 	# Running regression
-	m <- polr(form, data = tmp, Hess = TRUE, na.action = na.omit)
+	outcomes_table[, colnames(outcomes_table) == outcome] = factor(outcomes_table[, colnames(outcomes_table) == outcome])
+	formula = as.formula(paste(outcome, "~", paste(covariates, collapse = "+")))
+	m <- polr(formula, data = outcomes_table, Hess = TRUE, na.action = na.omit)
 	ctable <- coef(summary(m))
 	p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
 	ctable <- cbind(ctable, "p value" = p)
-	ci = conf_int(m)
+	ci = confint(m)
 	ctable = cbind(OR = exp(coef(m)) - 1, exp(ci) - 1, pval = p[names(p) %in% covariates])
 
 	# Get regression coefficients, CIs and p-values

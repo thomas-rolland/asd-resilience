@@ -35,11 +35,8 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 #### A tabular file listing the individuals with a least the following columns -> individual_table.tsv
 - iid *(individual id)*
 - status *(1-control, 2-case)*
-- age *(age of individual)*
-- sex *(1-male, 2-female)*
 
 #### A tabular file listing the sample sizes with a least the following columns -> sample_table.tsv
-- cohort *(in case multiple cohorts are analysed)*
 - status *(1-control, 2-case)*
 - N *(number of individuals)*
 
@@ -51,6 +48,8 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 #### A tabular file listing the individuals with a least the following columns -> outcomes_table.tsv
 - iid *(individual id)*
+- age *(age of individual)*
+- sex *(1-male, 2-female)*
 - fluid_intelligence_score *(Fluid intelligence score provided by UK-Biobank)*
 - townsend_index *(Townsend deprivation index provided by UK-Biobank)*
 - income *(Income before tax score provided by UK-Biobank)*

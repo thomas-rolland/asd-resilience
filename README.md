@@ -17,7 +17,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 * MASS R package (https://cran.r-project.org/web/packages/MASS/index.html)
 * stats R package (https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
 
-## Data requirements
+## Minimal data requirements
 
 #### The base-level pext score from the gnomAD website (GRCh37, https://gnomad.broadinstitute.org/downloads#v2-pext) -> all.baselevel.pext.tsv
 
@@ -31,17 +31,26 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - strand *(strand of the gene)*
 - relative_position *(as a percentage on encoded protein, from [loftee](https://github.com/konradjk/loftee) or [vep](https://www.ensembl.org/Tools/VEP)/[biomart](https://www.ensembl.org/biomart/martview/))*
 - iid *(individual id)*
-- transmission *(denovo, father, mother, unknown)*
 
 #### A tabular file listing the individuals with a least the following columns -> individual_table.tsv
 - iid *(individual id)*
 - status *(1-control, 2-case)*
 - age *(age of individual)*
 - sex *(1-male, 2-female)*
-- cohort *(in case multiple cohorts are analysed)*
-- ASD_PGS *(z-scored polygenic score values for ASD)*
 
-*Functioning/cognitive features for regression analyses amongst UK-Biobank individuals:*
+#### A tabular file listing the sample sizes with a least the following columns -> sample_table.tsv
+- cohort *(in case multiple cohorts are analysed)*
+- status *(1-control, 2-case)*
+- N *(number of individuals)*
+
+#### A tabular file listing the genes of interest with a least the following column -> gene_table.tsv
+- gene_symbol *(official HGNC gene symbol)*
+
+
+## Additional data requirements for specific analyses
+
+#### A tabular file listing the individuals with a least the following columns -> outcomes_table.tsv
+- iid *(individual id)*
 - fluid_intelligence_score *(Fluid intelligence score provided by UK-Biobank)*
 - townsend_index *(Townsend deprivation index provided by UK-Biobank)*
 - income *(Income before tax score provided by UK-Biobank)*
@@ -64,13 +73,9 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - CerebellumCortex
 - CerebellumWhiteMatter
 
-#### A tabular file listing the sample sizes with a least the following columns -> sample_table.tsv
-- cohort *(in case multiple cohorts are analysed)*
-- status *(1-control, 2-case)*
-- N *(number of individuals)*
-
-#### A tabular file listing the genes of interest with a least the following column -> gene_table.tsv
-- gene_symbol *(official HGNC gene symbol)*
+#### A tabular file listing the individuals with a least the following columns -> asd_gps_table.tsv
+- iid *(individual id)*
+- ASD_PGS *(z-scored polygenic score values for ASD)*
 
 
 ## Annotating variants with pext score
@@ -86,7 +91,7 @@ This script will match the pext score to the tabular file containing variants.
 attributableRiskRelativeRisk.R
 ```
 This script will calculate gene-level attributable risk and relative risk.
-- Input: variant_table.tsv, sample_table.tsv, gene_table.tsv
+- Input: variant_table.pext.tsv, sample_table.tsv, gene_table.tsv, variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
 - Output: R dataframe with, for each gene, fraction of carriers among cases and controls, relative risk and attributable risk with 95% CI
 
 ## Linear and ordinal regression between variant presence and outcomes
@@ -94,7 +99,7 @@ This script will calculate gene-level attributable risk and relative risk.
 linearOrdinalRegression.R
 ```
 This script will provide regression coefficients associated to specific covariates and variant presence.
-- Input: outcome_table.tsv, variant_table.tsv, outcome of interest, vector of covariates (e.g. sex, age)
+- Input: variant_table.pext.tsv, outcome_table.tsv, outcome of interest, vector of covariates (e.g. sex, age), variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
 - Output: R dataframe with regression coefficients associated to each covariate and variant presence, 95% CIs and p-value
 
 
@@ -103,7 +108,7 @@ This script will provide regression coefficients associated to specific covariat
 geneClusteringMRI.R
 ```
 This script will provide a dataframe summarizing brain volume differences between variant carriers and non-carriers by gene.
-- Input: gene_table.tsv, mri_table.tsv, variant_table.tsv
+- Input: variant_table.pext.tsv, gene_table.tsv, mri_table.tsv, variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
 - Output: R dataframe with, for each gene, the number of carriers, volume differences in each brain region and clustering results
 
 
@@ -112,7 +117,7 @@ This script will provide a dataframe summarizing brain volume differences betwee
 distributionIndividualsGPS.R
 ```
 This script will provide the fraction of individuals in each quantile of ASD-GPS.
-- Input: individual_table.tsv, variant_table.tsv, number of quantiles for GPS (default to 3 quantiles)
+- Input: variant_table.pext.tsv, asd_gps_table.tsv, number of quantiles for GPS (default to 3 quantiles), carriers or not (boolean, default to TRUE), variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
 - Output: R dataframe with, for each quantile, the number and fraction of individuals and the standard error of the proportion
 
 

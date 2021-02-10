@@ -74,7 +74,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 
 #### A tabular file listing the individuals with a least the following columns -> asd_gps_table.tsv
 - iid *(individual id)*
-- ASD_PGS *(z-scored polygenic score values for ASD)*
+- asd_gps *(z-scored polygenic score values for ASD)*
 
 
 ## Annotating variants with pext score

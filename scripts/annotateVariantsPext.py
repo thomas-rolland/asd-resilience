@@ -10,12 +10,12 @@ import pandas as pd
 from numpy import mean
 from pyliftover import LiftOver
 
-input_file = "variant_table.tsv"
-input_pext = "all.baselevel.pext.tsv"
-output_file = "variant_table.pext.tsv"
+input_file = "../demo/variant_table.tsv"
+input_pext = "../demo/all.baselevel.pext.tsv"
+output_file = "../demo/variant_table.pext.tsv"
 
 #=========================================================================
-# Loading liftover because pext is on hg19
+# Loading liftover chain because pext is on hg19
 #=========================================================================
 lo = LiftOver('hg38', 'hg19')
 
@@ -42,7 +42,7 @@ for i in range(0, VCF.shape[0]):
 	VCF["hg19_position"][i] = str(hg19_position)
 
 # Format dataframe
-vcf = pd.DataFrame(pd.concat([VCF["chromosome"].reset_index(drop=True), VCF["hg19_position"].reset_index(drop=True), VCF["ref"].reset_index(drop=True), VCF["alt"].reset_index(drop=True), VCF["consequence"].reset_index(drop=True), VCF["gene"].reset_index(drop=True)], axis = 1))
+vcf = pd.DataFrame(pd.concat([VCF["chromosome"].reset_index(drop=True), VCF["hg19_position"].reset_index(drop=True), VCF["ref"].reset_index(drop=True), VCF["alt"].reset_index(drop=True), VCF["consequence"].reset_index(drop=True), VCF["gene_symbol"].reset_index(drop=True)], axis = 1))
 vcf.columns = "chromosome position ref alt consequence gene".split()
 vcf["chrpos"] = vcf["chromosome"] + ":" + vcf["position"]
 vcf = vcf.drop_duplicates()
@@ -75,7 +75,7 @@ for chunk in iter_csv:
 				mn.append(float(value))
 		if len(mn) > 0:
 			chunk["pext"][i] = max(mn)
-	
+
 	# Recording variants found with their corresponding pext
 	chunk = pd.DataFrame(pd.concat([chunk["chr"].reset_index(drop = True), chunk["position"].reset_index(drop = True), chunk["pext"].reset_index(drop = True), chunk["chrpos"].reset_index(drop = True)], axis = 1))
 	variants_with_pext = pd.concat([variants_with_pext, chunk])
@@ -87,6 +87,6 @@ for chunk in iter_csv:
 VCF["chrpos_hg19"] = VCF["chromosome"] + ":" + VCF["hg19_position"]
 VCF["pext"] = "NA"
 for i in range(0, VCF.shape[0]):
-	if (len(all_variants["pext"][all_variants["chrpos"].isin([VCF["chrpos_hg19"][i]])]) > 0):
-		VCF["pext"][i] = all_variants["pext"][all_variants["chrpos"].isin([VCF["chrpos_hg19"][i]])].reset_index(drop=True)[0]
+	if (len(variants_with_pext["pext"][variants_with_pext["chrpos"].isin([VCF["chrpos_hg19"][i]])]) > 0):
+		VCF["pext"][i] = variants_with_pext["pext"][variants_with_pext["chrpos"].isin([VCF["chrpos_hg19"][i]])].reset_index(drop=True)[0]
 VCF.to_csv(output_file, sep = "\t", header = True, index = False)

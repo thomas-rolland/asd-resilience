@@ -3,8 +3,8 @@
 You will find here the python and R scripts developped for the post-processing analyses reported in Rolland et al. in preparation:
 - Annotating variants with pext score
 - Attributable risk and relative risk
-- Linear and ordinal regression between risk and socio-economic features in UK-Biobank
-- Clustering of genes and brain regions based on MRI-derived brain volumes in UK-Biobank
+- Linear and ordinal regression between risk and socio-economic features
+- Clustering of genes and brain regions based on MRI-derived brain volumes
 - Distribution of individuals in quantiles of ASD-PGS scores
 
 All raw genetic data are available upon request from [SFARI-base](https://sfari.org/sfari-base), [UK-Biobank](https://www.ukbiobank.ac.uk/), and downloadable from [the Autism Sequencing Consortium](https://genome.emory.edu/ASC/) and [gnomAD](https://gnomad.broadinstitute.org/downloads). The full variant calling and quality control pipeline is described in details in the manuscript. All phenotypic data for SSC and SPARK cohorts are available upon request from [SFARI-base](https://sfari.org/sfari-base). All functioning/cognitive metrics and MRI-based brain volumes for UK-Biobank individuals are available upon request from [UK-Biobank](https://www.ukbiobank.ac.uk/).
@@ -102,7 +102,7 @@ This script will provide regression coefficients associated to specific covariat
 - Output: R dataframe with regression coefficients associated to each covariate and variant presence, 95% CIs and p-value
 
 
-## Clustering of genes and brain regions based on MRI-derived brain volumes in UK-Biobank
+## Clustering of genes and brain regions based on MRI-derived brain volumes
 ```
 geneClusteringMRI.R
 ```

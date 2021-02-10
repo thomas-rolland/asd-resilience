@@ -26,7 +26,6 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - position
 - ref
 - alt
-- MAF *(minor allele frequency from [gnomAD](https://gnomad.broadinstitute.org/downloads))*
 - gene_symbol *(official HGNC gene symbol)*
 - consequence *(such as provided by [VEP](https://www.ensembl.org/Tools/VEP))*
 - strand *(strand of the gene)*
@@ -91,7 +90,7 @@ This script will match the pext score to the tabular file containing variants.
 attributableRiskRelativeRisk.R
 ```
 This script will calculate gene-level attributable risk and relative risk.
-- Input: variant_table.pext.tsv, sample_table.tsv, gene_table.tsv, variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
+- Input: variant_table.pext.tsv, sample_table.tsv, gene_table.tsv
 - Output: R dataframe with, for each gene, fraction of carriers among cases and controls, relative risk and attributable risk with 95% CI
 
 ## Linear and ordinal regression between variant presence and outcomes
@@ -99,7 +98,7 @@ This script will calculate gene-level attributable risk and relative risk.
 linearOrdinalRegression.R
 ```
 This script will provide regression coefficients associated to specific covariates and variant presence.
-- Input: variant_table.pext.tsv, outcome_table.tsv, outcome of interest, vector of covariates (e.g. sex, age), variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
+- Input: variant_table.pext.tsv, outcome_table.tsv, outcome of interest, vector of covariates (e.g. sex, age)
 - Output: R dataframe with regression coefficients associated to each covariate and variant presence, 95% CIs and p-value
 
 
@@ -108,7 +107,7 @@ This script will provide regression coefficients associated to specific covariat
 geneClusteringMRI.R
 ```
 This script will provide a dataframe summarizing brain volume differences between variant carriers and non-carriers by gene.
-- Input: variant_table.pext.tsv, gene_table.tsv, mri_table.tsv, variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
+- Input: variant_table.pext.tsv, gene_table.tsv, mri_table.tsv
 - Output: R dataframe with, for each gene, the number of carriers, volume differences in each brain region and clustering results
 
 
@@ -117,7 +116,7 @@ This script will provide a dataframe summarizing brain volume differences betwee
 distributionIndividualsGPS.R
 ```
 This script will provide the fraction of individuals in each quantile of ASD-GPS.
-- Input: variant_table.pext.tsv, asd_gps_table.tsv, number of quantiles for GPS (default to 3 quantiles), carriers or not (boolean, default to TRUE), variant type (HC-R-LoF or HC-S-LoF, default to HC-S-LoF)
+- Input: variant_table.pext.tsv, asd_gps_table.tsv, number of quantiles for GPS (default to 3 quantiles), carriers or not (boolean, default to TRUE)
 - Output: R dataframe with, for each quantile, the number and fraction of individuals and the standard error of the proportion
 
 

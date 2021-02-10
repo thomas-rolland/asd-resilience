@@ -5,7 +5,7 @@ You will find here the python and R scripts developped for the post-processing a
 - Attributable risk and relative risk
 - Linear and ordinal regression between risk and socio-economic features in UK-Biobank
 - Clustering of genes and brain regions based on MRI-derived brain volumes in UK-Biobank
-- Distribution of individuals in terciles of ASD-PGS scores
+- Distribution of individuals in quantiles of ASD-PGS scores
 
 All raw genetic data are available upon request from [SFARI-base](https://sfari.org/sfari-base), [UK-Biobank](https://www.ukbiobank.ac.uk/), and downloadable from [the Autism Sequencing Consortium](https://genome.emory.edu/ASC/) and [gnomAD](https://gnomad.broadinstitute.org/downloads). The full variant calling and quality control pipeline is described in details in the manuscript. All phenotypic data for SSC and SPARK cohorts are available upon request from [SFARI-base](https://sfari.org/sfari-base). All functioning/cognitive metrics and MRI-based brain volumes for UK-Biobank individuals are available upon request from [UK-Biobank](https://www.ukbiobank.ac.uk/).
 
@@ -78,33 +78,42 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 annotateVariantsPext.py
 ```
 This script will match the pext score to the tabular file containing variants.
+- Input: variant_table.tsv, all.baselevel.pext.tsv
+- Output: variant_table.pext.tsv (adding hg19_position and pext columns)
 
 ## Attributable risk and relative risk
 ```
 attributableRiskRelativeRisk.R
 ```
 This script will calculate gene-level attributable risk and relative risk.
+- Input: variant_table.tsv, sample_table.tsv, gene_table.tsv
+- Output: R dataframe with, for each gene, fraction of carriers among cases and controls, relative risk with 95% CIs, attributable risk with 95% CI
 
-
-## Linear and ordinal regression between LoF presence and outcomes
+## Linear and ordinal regression between variant presence and outcomes
 ```
 linearOrdinalRegression.R
 ```
-This script will provide regression coefficients associated to specific covariates, including LoF presence.
+This script will provide regression coefficients associated to specific covariates and variant presence.
+- Input: outcome_table.tsv, variant_table.tsv, outcome of interest, vector of covariates (e.g. sex, age)
+- Output: R dataframe with regression coefficients associated to each covariate and variant presence, 95% CIs and p-value
 
 
 ## Clustering of genes and brain regions based on MRI-derived brain volumes in UK-Biobank
 ```
 geneClusteringMRI.R
 ```
-This script will provide a dataframe summarizing brain volume differences between LoF carriers and non-carriers by gene.
+This script will provide a dataframe summarizing brain volume differences between variant carriers and non-carriers by gene.
+- Input: gene_table.tsv, mri_table.tsv, variant_table.tsv
+- Output: R dataframe with, for each gene, the number of carriers, volume differences in each brain region and clustering results
 
 
-## Distribution of individuals in terciles of ASD-PGS scores
+## Distribution of individuals in quantiles of ASD-PGS scores
 ```
 distributionIndividualsGPS.R
 ```
-This script will provide the fraction of individuals in each quantile of ASD-GPS (default to 3 quantiles).
+This script will provide the fraction of individuals in each quantile of ASD-GPS.
+- Input: individual_table.tsv, variant_table.tsv, number of quantiles for GPS (default to 3 quantiles)
+- Output: R dataframe with, for each quantile, the number and fraction of individuals and the standard error of the proportion
 
 
 

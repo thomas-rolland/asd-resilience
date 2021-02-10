@@ -1,36 +1,31 @@
-
 #=========================================================================
 # attributableRiskRelativeRisk.R
 # Functions to calculate AR and RR with confidence intervals
 #=========================================================================
 
 # Number of individuals carrying variants per gene
-variant2gene = function(variant_table, sample_table, gene_table)
+variant2gene = function(variant_table, individual_table, sample_table, gene_table)
 {
 	# Creating dataframe per gene, stratified by cohort and status
-	tab_gene = as.data.frame(cbind(expand.grid(gene_table$gene_symbol, unique(sample_table$cohort), unique(sample_table$status)), NC = 0, N = 0))
-  	colnames(tab_gene) = c("gene", "cohort", "status", "NC", "N")
+	tab_gene = as.data.frame(cbind(expand.grid(gene_table$gene_symbol, unique(sample_table$status)), NC = 0, N = 0))
+  	colnames(tab_gene) = c("gene", "status", "NC", "N")
 
 	# Formatting columns
 	tab_gene$gene = as.character(tab_gene$gene)
-	tab_gene$cohort = as.character(tab_gene$cohort)
 	tab_gene$status = as.character(tab_gene$status)
 	tab_gene$N = as.double(tab_gene$N)
 	tab_gene$NC = as.double(tab_gene$NC)
 
-	# Calculate number of variants per gene stratified by cohort and status
+	# Calculate number of variants per gene stratified by status
 	for (gene in unique(tab_gene$gene))
 	{
-		for (cohort in unique(tab_gene$cohort))
-  		{
-			for (status in unique(tab_gene$status))
-			{
-				tab_gene$NC[tab_gene$gene == gene & tab_gene$cohort == cohort & tab_gene$status == status] = length(unique(variant_table$iid[variant_table$gene == gene & variant_table$cohort == cohort & variant_table$status == status]))
-				tab_gene$N[tab_gene$gene == gene & tab_gene$cohort == cohort & tab_gene$status == status] = sample_table$N[sample_table$cohort == cohort & sample_table$status == status]
-			}
+		for (status in unique(tab_gene$status))
+		{
+			tab_gene$NC[tab_gene$gene == gene & tab_gene$status == status] = length(unique(variant_table$iid[variant_table$gene_symbol == gene & variant_table$iid %in% individual_table$iid[individual_table$status == status]]))
+			tab_gene$N[tab_gene$gene == gene & tab_gene$status == status] = sample_table$N[sample_table$status == status]
 		}
 	}
-	
+
 	return (tab_gene)
 }
 
@@ -41,7 +36,7 @@ gene2risk = function(tab_gene, sample_table, RR_Inf = TRUE, RR_zero = FALSE)
 	# tab_gene = Dataframe provided by variant2gene function above
 	# RR_Inf = Boolean indicating whether infinite relative risk values due to absent carrier controls should be artificially set to 1 to avoid infinite RR
 	# RR_zero = Boolean indicating whether genes for which no carrier cases were identified should be removed
-	
+
 	tab_risk = as.data.frame(cbind(gene = as.character(unique(tab_gene$gene)), case = 0, control = 0, RR = 0, logRR_CI_low = 0, logRR_CI_high = 0, AR = 0, AR_CI_low = 0, AR_CI_high = 0))
 
 	# Format columns
@@ -63,7 +58,7 @@ gene2risk = function(tab_gene, sample_table, RR_Inf = TRUE, RR_zero = FALSE)
 			CE = 1
 			CN = sample_table$N[sample_table$status == "Control"] - CE
 		}
-    
+
 		# Fraction of cases and controls with variant
 		tab_risk$case[tab_risk$gene == gene] = IE / (IE + IN)
 		tab_risk$control[tab_risk$gene == gene] = CE / (CE + CN)
@@ -91,3 +86,11 @@ gene2risk = function(tab_gene, sample_table, RR_Inf = TRUE, RR_zero = FALSE)
 	return (tab_risk)
 }
 
+# Calculate attributable risk and relative risk with corresponding 95% CIs
+variant2risk = function(variant_table, individual_table, sample_table, gene_table)
+{
+	variant2gene_tab = variant2gene(variant_table, individual_table, sample_table, gene_table)
+	gene2risk_tab = gene2risk(variant2gene_tab, sample_table, RR_Inf = TRUE, RR_zero = FALSE)
+
+	return (gene2risk_tab)
+}

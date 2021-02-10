@@ -12,7 +12,7 @@ from pyliftover import LiftOver
 
 input_file = "variant_table.tsv"
 input_pext = "all.baselevel.pext.tsv"
-output_file = "variant_table_pext.tsv"
+output_file = "variant_table.pext.tsv"
 
 #=========================================================================
 # Loading liftover because pext is on hg19

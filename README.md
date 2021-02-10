@@ -87,7 +87,7 @@ attributableRiskRelativeRisk.R
 ```
 This script will calculate gene-level attributable risk and relative risk.
 - Input: variant_table.tsv, sample_table.tsv, gene_table.tsv
-- Output: R dataframe with, for each gene, fraction of carriers among cases and controls, relative risk with 95% CIs, attributable risk with 95% CI
+- Output: R dataframe with, for each gene, fraction of carriers among cases and controls, relative risk and attributable risk with 95% CI
 
 ## Linear and ordinal regression between variant presence and outcomes
 ```

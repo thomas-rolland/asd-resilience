@@ -26,6 +26,7 @@ All raw genetic data are available upon request from [SFARI-base](https://sfari.
 - position
 - ref
 - alt
+- MAF *(minor allele frequency from [gnomAD](https://gnomad.broadinstitute.org/downloads))*
 - gene_symbol *(official HGNC gene symbol)*
 - consequence *(such as provided by [VEP](https://www.ensembl.org/Tools/VEP))*
 - strand *(strand of the gene)*

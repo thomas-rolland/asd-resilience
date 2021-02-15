@@ -1,6 +1,6 @@
 # ASD resilience analyses
 
-You will find here the python and R scripts developped for the post-processing analyses reported in Rolland et al. in preparation:
+You will find here the python and R scripts developped for the post-processing analyses reported in [Rolland et al. MedRxiv 2021](https://www.medrxiv.org/content/10.1101/2021.02.12.21251621v1):
 - Annotating variants with pext score
 - Attributable risk and relative risk
 - Linear and ordinal regression between risk and socio-economic features
